@@ -96,8 +96,8 @@ Khi người thứ 2 muốn lấy dự án về máy cá nhân để cùng chạ
 
 **Bước 2: Tải mã nguồn từ Git về máy**
 ```powershell
-git clone <ĐƯỜNG_DẪN_GITHUB_CỦA_NHÓM>
-cd ComputerVision
+git clone https://github.com/binhminh1201/Brain-Tumor-MRI-2D-NCKH.git
+cd Brain-Tumor-MRI-2D-NCKH
 ```
 
 **Bước 3: Tạo môi trường ảo `.venv` trên máy của thành viên thứ 2**
