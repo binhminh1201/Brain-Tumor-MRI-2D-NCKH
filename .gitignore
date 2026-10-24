@@ -1,0 +1,31 @@
+# Môi trường ảo Python
+.venv/
+venv/
+ENV/
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Dữ liệu thô và dữ liệu đã giải nén dung lượng lớn (không đẩy lên Git để tránh nặng kho chứa)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/splits/*
+!data/splits/.gitkeep
+
+# Trọng số mô hình nặng (.pth, .onnx) - chỉ giữ lại cấu trúc thư mục và bảng số liệu CSV/hình ảnh báo cáo
+outputs/checkpoints/*.pth
+outputs/checkpoints/*.onnx
+!outputs/checkpoints/.gitkeep
+!outputs/figures/.gitkeep
+!outputs/tables/.gitkeep
+
+# Hệ điều hành & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
