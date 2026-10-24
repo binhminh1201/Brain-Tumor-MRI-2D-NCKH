@@ -16,6 +16,7 @@ data/processed/*
 !data/processed/.gitkeep
 data/splits/*
 !data/splits/.gitkeep
+!data/splits/dataset_summary.json
 
 # Trọng số mô hình nặng (.pth, .onnx) - chỉ giữ lại cấu trúc thư mục và bảng số liệu CSV/hình ảnh báo cáo
 outputs/checkpoints/*.pth

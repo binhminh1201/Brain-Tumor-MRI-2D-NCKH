@@ -126,11 +126,11 @@ python -m pip install --upgrade pip
 
 Sau khi đã kích hoạt môi trường ảo `(.venv)`:
 
-1. **Tạo dữ liệu MRI 2D mẫu để kiểm thử toàn bộ hệ thống ngay lập tức:**
+1. **Tải và chuẩn bị bộ dữ liệu MRI 2D bệnh nhân thật (Figshare 3.064 ảnh có Mask + Sartaj 500 ảnh No Tumor = 3.564 ảnh 2D):**
    ```powershell
-   python scripts/prepare_data.py --create-demo
+   python scripts/prepare_data.py --download-real
    ```
-   *(Hoặc khi đã tải bộ dữ liệu Figshare `.mat` vào `data/raw/figshare`: `python scripts/prepare_data.py --convert-figshare data/raw/figshare`)*.
+   *(Hoặc nếu chỉ muốn tạo nhanh bộ ảnh giả lập nhỏ để kiểm tra code: `python scripts/prepare_data.py --create-demo`)*.
 
 2. **Huấn luyện mô hình Phân loại 2D (Classification):**
    ```powershell
