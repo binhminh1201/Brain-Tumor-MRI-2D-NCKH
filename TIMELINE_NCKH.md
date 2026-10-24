@@ -29,35 +29,47 @@
 ### 🔹 PHIÊN 1 (Ngày 24/10/2026): Định hình Đề tài, Thiết kế Kiến trúc 2D & Khởi tạo Mã nguồn Cốt lõi
 
 #### 1. Những gì ĐÃ LÀM ĐƯỢC (Completed ✅)
-- **Xác lập mục tiêu & phạm vi nghiên cứu:**
-  - Chốt hướng nghiên cứu tập trung 100% vào **ảnh MRI 2D** với 4 lớp phân loại (*No tumor, Glioma, Meningioma, Pituitary*) và phân đoạn mặt nạ nhị phân (*Binary Segmentation Mask*).
-  - Chốt phương thức làm việc nhóm 2 người: Đồng bộ qua Git + môi trường ảo `.venv` chuẩn (không dùng Docker để giữ sự gọn nhẹ).
-- **Khảo sát phần cứng máy Local số 1:**
-  - Hệ điều hành: Windows (PowerShell).
-  - Phát hiện máy có sẵn GPU rời **NVIDIA Quadro T1000** — đủ khả năng huấn luyện trực tiếp các mô hình ảnh 2D ($256 \times 256$) ngay trên máy cá nhân với tốc độ cao.
-- **Xây dựng hoàn chỉnh bộ khung mã nguồn (Codebase) từ cơ bản đến nâng cao tại `d:\ComputerVision`:**
-  - [src/config.py](file:///d:/ComputerVision/src/config.py): Thiết lập tham số chuẩn hóa ảnh 2D ($256 \times 256$), nhãn tiếng Anh/tiếng Việt và siêu tham số huấn luyện.
-  - [src/dataset.py](file:///d:/ComputerVision/src/dataset.py): Xây dựng bộ nạp dữ liệu `BrainMRIClassificationDataset`, `BrainMRISegmentationDataset`, tích hợp tiền xử lý **CLAHE 2D** và tăng cường dữ liệu (Lật ngang đối xứng bán cầu não, xoay nhẹ $\pm 15^\circ$).
-  - [src/models/classifiers.py](file:///d:/ComputerVision/src/models/classifiers.py): Xây dựng mạng `BasicCNN2D` (4 lớp cơ bản để học lý thuyết) và các mạng `VGG16`, `ResNet50` (Baseline nặng), `ResNet18`, `MobileNetV2` (Mô hình nhẹ).
-  - [src/models/unet_2d.py](file:///d:/ComputerVision/src/models/unet_2d.py): Xây dựng `StandardUNet2D` (~31M tham số) và mô hình đề xuất `LightweightMultiTaskUNet2D` (kết hợp khoanh vùng Mask 2D và phân loại 4 lớp u với tích chập tách chiều).
-  - [src/utils/losses.py](file:///d:/ComputerVision/src/utils/losses.py) & [src/utils/metrics.py](file:///d:/ComputerVision/src/utils/metrics.py): Cài đặt hàm mất mát kết hợp $\mathcal{L}_{BCE} + \mathcal{L}_{Dice}$, độ đo `Dice Score`, `IoU`, và hàm đo diện tích khối u theo pixel.
-  - [src/utils/gradcam.py](file:///d:/ComputerVision/src/utils/gradcam.py): Cài đặt giải thuật **Grad-CAM 2D** vẽ bản đồ nhiệt giải thích vùng mô bất thường và vẽ đường viền Contour khối u.
-  - [scripts/](file:///d:/ComputerVision/scripts): Hoàn thiện 4 kịch bản tự động: `prepare_data.py`, `train_cls.py`, `train_seg.py`, `export_and_benchmark_onnx.py`.
-  - [app/main_app.py](file:///d:/ComputerVision/app/main_app.py): Xây dựng giao diện nguyên mẫu bằng `Streamlit` hiển thị 4 khung chẩn đoán trực quan.
-  - Khởi tạo kho chứa Git (`git init`), quy tắc dự án [GEMINI.md](file:///d:/ComputerVision/GEMINI.md) và tài liệu hướng dẫn triển khai cho thành viên thứ 2 trong [README.md](file:///d:/ComputerVision/README.md).
+- Xác lập mục tiêu & phạm vi nghiên cứu: Tập trung 100% vào **ảnh MRI 2D** ($256 \times 256$) với 4 lớp phân loại (*No tumor, Glioma, Meningioma, Pituitary*) và phân đoạn mặt nạ nhị phân (*Binary Segmentation Mask*).
+- Khảo sát phần cứng máy Local số 1: Phát hiện GPU rời **NVIDIA Quadro T1000** hỗ trợ CUDA.
+- Xây dựng hoàn chỉnh bộ khung mã nguồn tại `d:\ComputerVision` (`src/`, `scripts/`, `app/`) kèm quy tắc dự án [GEMINI.md](file:///d:/ComputerVision/GEMINI.md) và hướng dẫn nhóm 2 người [README.md](file:///d:/ComputerVision/README.md).
+
+---
+
+### 🔹 PHIÊN 2 (Ngày 24/10/2026): Hoàn tất Cài đặt Môi trường Local (`.venv` + CUDA), Kiểm thử Pipeline 2D & Đo Benchmark CPU/ONNX Đầu Tiên
+
+#### 1. Những gì ĐÃ LÀM ĐƯỢC (Completed ✅)
+- **Hoàn tất cài đặt môi trường ảo `.venv` (Python 3.11) và thư viện học sâu trên máy Local số 1:**
+  - Cài đặt thành công `torch-2.5.1+cu121` và `torchvision-0.20.1+cu121`, xác nhận kết nối trực tiếp với card rời **NVIDIA Quadro T1000** (`CUDA available: True`).
+  - Cài đặt đầy đủ toàn bộ các gói trong `requirements.txt` (`opencv-python`, `albumentations`, `scikit-learn`, `onnx`, `onnxruntime`, `streamlit`, `h5py`...).
+- **Khắc phục lỗi hiển thị tiếng Việt (`UnicodeEncodeError` trên Windows PowerShell):**
+  - Bổ sung cấu hình `sys.stdout.reconfigure(encoding="utf-8")` vào file trung tâm [src/config.py](file:///d:/ComputerVision/src/config.py#L9-L12) giúp mọi kịch bản Python in tiếng Việt có dấu mượt mà trên Windows.
+- **Chạy kiểm thử thành công toàn bộ Pipeline 2D (End-to-End Verification):**
+  - Sinh bộ dữ liệu MRI 2D mẫu (`scripts/prepare_data.py --create-demo`).
+  - Chạy kiểm thử huấn luyện trên GPU `Quadro T1000` cho cả bài toán Phân loại (`scripts/train_cls.py`) và Khoanh vùng đa nhiệm (`scripts/train_seg.py`).
+- **Thu thập Bảng kết quả Thực nghiệm Benchmark Tối ưu hóa Mô hình 2D trên CPU ([outputs/tables/benchmark_results.csv](file:///d:/ComputerVision/outputs/tables/benchmark_results.csv)):**
+  - Đây là số liệu thực nghiệm cực kỳ đắt giá chứng minh mục tiêu *"tối ưu hóa dung lượng và tốc độ suy luận trên thiết bị cấu hình hạn chế"*:
+
+| Mô hình 2D ($256 \times 256$) | Định dạng | Số tham số (Triệu) | Dung lượng (MB) | Thời gian CPU (ms/ảnh) | Tốc độ (FPS) |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Standard 2D U-Net (Baseline Nặng)** | PyTorch / ONNX (FP32) | 31.038 M | 118.37 MB | 478.63 ms | 2.1 FPS |
+| **Lightweight Multi-Task 2D U-Net (Đề xuất)** | PyTorch / ONNX (FP32) | **0.990 M** | **3.76 MB** | **36.35 ms** | **27.5 FPS** |
+| **Lightweight Multi-Task 2D U-Net [Nén INT8]** | ONNX Quantized (INT8) | **0.990 M** | **1.03 MB** | 148.23 ms | 6.7 FPS |
+| **MobileNetV2 2D Classifier** | PyTorch / ONNX (FP32) | 2.229 M | 8.43 MB | **4.86 ms** | **205.9 FPS** |
+| **MobileNetV2 2D Classifier [Nén INT8]** | ONNX Quantized (INT8) | 2.229 M | **2.26 MB** | 37.72 ms | 26.5 FPS |
+| **Basic 4-Layer 2D CNN** | PyTorch / ONNX (FP32) | 0.390 M | 1.49 MB | 8.38 ms | 119.4 FPS |
+
+> 💡 **Nhận xét khoa học rút ra để đưa vào Bài báo NCKH:**
+> 1. So với mạng `Standard 2D U-Net` truyền thống ($31.038$ triệu tham số, nặng $118.37\text{ MB}$), mô hình đề xuất **`Lightweight Multi-Task 2D U-Net`** chỉ có **$0.990$ triệu tham số** (giảm **96.8%** lượng tham số), dung lượng bản `FP32` giảm xuống chỉ còn **$3.76\text{ MB}$** (và bản nén `INT8` chỉ còn **$1.03\text{ MB}$** — nhẹ hơn **115 lần**!).
+> 2. Về tốc độ suy luận thực tế trên **CPU thường**, mô hình đề xuất chạy chỉ mất **$36.35\text{ ms/ảnh}$** (đạt **$27.5\text{ FPS}$**, tức thời gian thực Real-time), **nhanh gấp $13.1$ lần** so với U-Net truyền thống ($478.63\text{ ms/ảnh}$), trong khi lại giải quyết được đồng thời cả 2 nhiệm vụ (Khoanh vùng + Phân loại).
 
 #### 2. Những gì ĐANG TRIỂN KHAI (In Progress 🔄)
-- **Thiết lập môi trường Python 3.11 & PyTorch CUDA trên máy Local:**
-  - Cài đặt Python 3.11, tạo môi trường ảo `.venv` và cài đặt các gói thư viện trong `requirements.txt` (kèm PyTorch hỗ trợ GPU NVIDIA Quadro T1000).
-- **Chạy kiểm thử luồng dữ liệu 2D mẫu (`--create-demo`):**
-  - Sinh ảnh MRI 2D mẫu để kiểm tra toàn bộ pipeline từ Huấn luyện -> Xuất ONNX -> Hiển thị lên giao diện Streamlit.
+- Chuẩn bị tải và tích hợp bộ dữ liệu MRI 2D thực tế (**Figshare Brain Tumor Dataset** và **Kaggle Brain Tumor MRI Dataset**) vào `data/raw/` để huấn luyện lấy độ chính xác thực tế (>90%).
 
 #### 3. Những gì CHƯA LÀM ĐƯỢC / KẾ HOẠCH TIẾP THEO (Pending / Backlog ⏳)
-- [ ] **Giai đoạn 1 (Dữ liệu thực tế):** Tải bộ dữ liệu chuẩn quốc tế **Figshare Brain Tumor 2D (3.064 ảnh `.mat` có mask)** và **Kaggle Brain Tumor MRI 2D (7.023 ảnh 4 lớp)** đưa vào `data/raw/` và chạy giải nén sang `data/processed/`.
-- [ ] **Giai đoạn 2 (Thực nghiệm Phân loại CNN 2D):** Huấn luyện đối sánh `BasicCNN2D`, `VGG16`, `ResNet50`, `ResNet18`, `MobileNetV2` trên dữ liệu thật, thu thập **Bảng kết quả 1** (đạt Accuracy > 90%, mục tiêu 95%–98%) và vẽ Confusion Matrix.
-- [ ] **Giai đoạn 3 & 4 (Thực nghiệm Khoanh vùng & Đa nhiệm 2D U-Net):** Huấn luyện đối sánh `StandardUNet2D` và `LightweightMultiTaskUNet2D`, thu thập **Bảng kết quả 2** (`Dice Score`, `IoU`) và xuất ảnh minh họa Grad-CAM + Contour khối u.
-- [ ] **Giai đoạn 5 (Tối ưu hóa ONNX & Đo tốc độ thiết bị hạn chế):** Xuất trọng số đã huấn luyện sang `.onnx` (`FP32` & `INT8`), đo tốc độ suy luận thực tế trên CPU (`ms/ảnh`, `FPS`, dung lượng `MB`) để lập **Bảng kết quả 3**.
-- [ ] **Giai đoạn 6 (Hoàn thiện Nguyên mẫu & Viết Báo cáo/Bài báo):** Đóng gói ứng dụng nguyên mẫu chạy mượt và viết hoàn chỉnh Báo cáo tổng kết NCKH + Bài báo khoa học cấp trường dựa trên số liệu và Timeline này.
+- [ ] **Giai đoạn 1B (Dữ liệu thật):** Tải bộ dữ liệu thực tế Figshare & Kaggle MRI 2D vào `data/raw/` và giải nén sang `data/processed/`.
+- [ ] **Giai đoạn 2 (Huấn luyện Phân loại trên dữ liệu thật):** Huấn luyện `BasicCNN2D`, `ResNet18`, `MobileNetV2` với 30 epochs trên GPU Quadro T1000 để đạt **Accuracy > 90%** (mục tiêu 94%–98%), xuất biểu đồ Learning Curve và Confusion Matrix vào `outputs/figures/`.
+- [ ] **Giai đoạn 3 & 4 (Huấn luyện Khoanh vùng & Đa nhiệm trên dữ liệu thật):** Huấn luyện `StandardUNet2D` và `LightweightMultiTaskUNet2D` với 40 epochs để đạt **Dice Score > 80%**, xuất ảnh minh họa Grad-CAM + Contour khối u.
+- [ ] **Giai đoạn 6 (Nguyên mẫu & Viết Báo cáo):** Chạy thử nghiệm giao diện `streamlit run app/main_app.py` với trọng số đã huấn luyện trên dữ liệu thật và tổng hợp Bài báo khoa học cấp trường.
 
 ---
 
@@ -66,9 +78,10 @@
 | Giai đoạn | Hạng mục công việc | Trạng thái | Ghi chú / Kết quả |
 | :--- | :--- | :---: | :--- |
 | **GĐ 0** | Chốt đề tài, mục tiêu, kiến trúc 2D & Khởi tạo Git/Codebase | ✅ **Hoàn thành** | Đã tạo đầy đủ cấu trúc code tại `d:\ComputerVision` |
-| **GĐ 1** | Cài đặt môi trường `.venv` + Chuẩn bị dữ liệu MRI 2D (Demo & Thật) | 🔄 **Đang làm** | Đang cài đặt Python 3.11 + PyTorch CUDA trên máy Local |
-| **GĐ 2** | Huấn luyện & Đánh giá các mô hình Phân loại CNN 2D (>90%) | ⏳ **Chưa làm** | Code `scripts/train_cls.py` đã sẵn sàng |
-| **GĐ 3** | Huấn luyện & Đánh giá mô hình Khoanh vùng U-Net 2D | ⏳ **Chưa làm** | Code `scripts/train_seg.py` đã sẵn sàng |
+| **GĐ 1A** | Cài đặt `.venv` (Python 3.11 + CUDA GPU) & Kiểm thử luồng dữ liệu 2D Demo | ✅ **Hoàn thành** | Đã nhận GPU Quadro T1000 & chạy thông suốt toàn bộ code |
+| **GĐ 1B** | Tải & Tiền xử lý bộ dữ liệu MRI 2D thực tế (Figshare / Kaggle) | 🔄 **Đang làm** | Bước tiếp theo ngay sau khi kiểm thử |
+| **GĐ 2** | Huấn luyện & Đánh giá các mô hình Phân loại CNN 2D (>90%) trên dữ liệu thật | ⏳ **Chưa làm** | Đã kiểm thử thành công code `scripts/train_cls.py` |
+| **GĐ 3** | Huấn luyện & Đánh giá mô hình Khoanh vùng U-Net 2D trên dữ liệu thật | ⏳ **Chưa làm** | Đã kiểm thử thành công code `scripts/train_seg.py` |
 | **GĐ 4** | Tích hợp Đa nhiệm + Đo diện tích u + Bản đồ nhiệt Grad-CAM | ⏳ **Chưa làm** | Module `gradcam.py` & `metrics.py` đã sẵn sàng |
-| **GĐ 5** | Xuất chuẩn ONNX, nén INT8 & Benchmark tốc độ trên CPU | ⏳ **Chưa làm** | Code `scripts/export_and_benchmark_onnx.py` đã sẵn sàng |
-| **GĐ 6** | Chạy thử nghiệm Ứng dụng Nguyên mẫu & Viết Bài báo cấp trường | ⏳ **Chưa làm** | Giao diện `app/main_app.py` đã sẵn sàng |
+| **GĐ 5** | Xuất chuẩn ONNX, nén INT8 & Benchmark tốc độ trên CPU | ✅ **Hoàn thành bước 1** | Đã có bảng `outputs/tables/benchmark_results.csv` (nhanh gấp 13.1 lần, nhẹ hơn 96.8%) |
+| **GĐ 6** | Chạy thử nghiệm Ứng dụng Nguyên mẫu & Viết Bài báo cấp trường | ⏳ **Chưa làm** | Giao diện `app/main_app.py` đã sẵn sàng chạy thử |

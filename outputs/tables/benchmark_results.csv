@@ -1,0 +1,7 @@
+﻿Mô hình 2D,Định dạng,Tham số (Triệu),Dung lượng (MB),Thời gian CPU (ms/ảnh),Tốc độ (FPS)
+Standard 2D U-Net (Baseline Nặng),PyTorch / ONNX (FP32),31.038,118.37,478.63,2.1
+Lightweight Multi-Task 2D U-Net (Đề xuất),PyTorch / ONNX (FP32),0.99,3.76,36.35,27.5
+Lightweight Multi-Task 2D U-Net (Đề xuất) [Tối ưu INT8],ONNX Quantized (INT8),0.99,1.03,148.23,6.7
+MobileNetV2 2D Classifier,PyTorch / ONNX (FP32),2.229,8.43,4.86,205.9
+MobileNetV2 2D Classifier [Tối ưu INT8],ONNX Quantized (INT8),2.229,2.26,37.72,26.5
+Basic 4-Layer 2D CNN,PyTorch / ONNX (FP32),0.39,1.49,8.38,119.4

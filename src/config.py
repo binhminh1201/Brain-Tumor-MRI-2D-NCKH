@@ -4,6 +4,13 @@ Phát hiện, khoanh vùng và phân loại khối u não trên ảnh MRI 2D.
 """
 
 from pathlib import Path
+import sys
+
+# Đảm bảo hiển thị tiếng Việt có dấu trên Terminal Windows không bị lỗi font/UnicodeEncodeError
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8")
 
 # 1. Đường dẫn thư mục gốc
 ROOT_DIR = Path(__file__).resolve().parent.parent
