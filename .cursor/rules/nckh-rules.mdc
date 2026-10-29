@@ -1,0 +1,16 @@
+---
+description: Quy tắc bắt buộc ghi nhận timeline NCKH và đồng bộ Git cho dự án U não MRI 2D
+globs: **/*
+alwaysApply: true
+---
+
+# Quy Tắc Điều Hành Dành Cho AI (Cursor AI / Copilot / Agents)
+
+Khi thành viên làm việc trong dự án này:
+1. Luôn tuân thủ định dạng ảnh **2D chuẩn 256x256**, không dùng mô hình 3D.
+2. Mọi giải thích lý thuyết/code phải từ mức cơ bản nhất phục vụ viết báo cáo NCKH.
+3. Cuối mỗi phiên làm việc, **BẮT BUỘC** cập nhật vào file `TIMELINE_NCKH.md`:
+   - Đã làm được (Completed)
+   - Đang triển khai (In Progress)
+   - Chưa làm được / Kế hoạch tiếp theo (Pending)
+4. Tự động commit và push Git (`git add -A`, `git commit -m "..."`, `git push origin main`).
