@@ -1,6 +1,7 @@
 # 🧠 Đề Tài NCKH: Ứng Dụng Thị Giác Máy Tính & Học Sâu Trong Phát Hiện, Khoanh Vùng Và Phân Loại U Não Trên Ảnh MRI 2D
 
 > 📌 **Theo dõi Tiến độ & Nhật ký Nghiên cứu:** Mọi công việc đã làm được, đang triển khai và chưa làm được qua từng phiên làm việc đều được ghi chép chi tiết tại [**TIMELINE_NCKH.md**](./TIMELINE_NCKH.md) để phục vụ trực tiếp cho việc viết Báo cáo tổng kết và Bài báo khoa học cấp trường.
+> 📚 **Tổng hợp Bài báo Khoa học Tham khảo & Từ điển Bản chất Cốt lõi (Theo định hướng GVHD):** Xem tại [**docs/TONG_QUAN_BAI_BAO_THAM_KHAO.md**](./docs/TONG_QUAN_BAI_BAO_THAM_KHAO.md).
 
 ---
 
