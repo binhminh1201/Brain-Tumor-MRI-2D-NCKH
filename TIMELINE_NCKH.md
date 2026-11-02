@@ -82,15 +82,46 @@
 
 ---
 
+### 🔹 PHIÊN 4 (Ngày 03/11/2026): Họp Định Hướng Với Giảng Viên Hướng Dẫn (GVHD) — Chốt Lộ Trình 4 Tháng, Bài Toán "Điểm Vàng" Nén Mô Hình & Hướng Mở Rộng Federated Learning
+
+#### 1. Những gì ĐÃ LÀM ĐƯỢC (Completed ✅)
+- **Họp trực tiếp với Giảng viên hướng dẫn và thống nhất 5 định hướng cốt lõi:**
+  1. **Về Dữ liệu (Dataset & Bias):**
+     - Thầy xác nhận bộ dữ liệu **>3.000 ảnh MRI 2D** (hiện nhóm đã chuẩn hóa **3.564 ảnh & Mask** từ Figshare + Sartaj) là **đủ lớn và phù hợp** để thực hiện đề tài (vì xin dữ liệu bệnh viện thực tế tại Việt Nam vướng rào cản pháp lý và quyền riêng tư bệnh nhân).
+     - **Góc nhìn học thuật bổ sung vào báo cáo:** Cần phân tích hiện tượng **Data Bias (Thiên lệch dữ liệu)** khi huấn luyện trên các bộ dữ liệu chuẩn công khai (Benchmark) so với dữ liệu thực tế đa nguồn.
+  2. **Về Trọng tâm Nghiên cứu (CNN / U-Net & Tìm "Điểm vàng" khi Nén mô hình):**
+     - Phần cốt lõi quan trọng nhất là **huấn luyện mô hình nhận diện (CNN/U-Net)** và **tối ưu hóa/nén bộ tham số (`state_dict`)** cho thiết bị biên.
+     - Khi nén mô hình (giảm số lượng tham số hoặc gộp/lượng tử hóa tham số), mô hình sẽ mất đi một số đặc trưng (*features*) dẫn đến giảm độ chính xác. Nhiệm vụ thực nghiệm của nhóm là tìm ra **"Điểm vàng" (Sweet Spot / Trade-off)**: Nén dung lượng giảm 3–4 lần (hoặc >90%) nhưng độ chính xác chỉ giảm rất ít (vẫn giữ ở mức cao >80%–90%), không bị suy giảm đột ngột.
+  3. **Về Hướng mở rộng tiềm năng (Federated Learning - Học liên kết trên thiết bị biên):**
+     - Thầy gợi ý nếu nhóm làm xong sớm phần cốt lõi, có thể mở rộng thêm mô hình **Federated Learning (FL)** hoặc **Hierarchical FL (Học liên kết phân cấp: Worker thiết bị biên $\rightarrow$ Hub bệnh viện khu vực $\rightarrow$ Aggregator trung tâm)**.
+     - *Bản chất:* Các bệnh viện không cần gửi ảnh MRI bệnh nhân đi (đảm bảo bảo mật y tế), mà chỉ gửi **bộ tham số mô hình (`state_dict`)** đã học tại thiết bị biên về máy chủ `Aggregator` để tính trung bình cộng có trọng số (**FedAvg**) theo chu kỳ (ngày/tuần), giúp cập nhật mô hình tổng ngày càng thông minh hơn.
+  4. **Về Mốc thời gian (Timeline tổng thể 4–5 tháng):**
+     - **Tháng 11/2026 – Đầu tháng 03/2027 (4 tháng):** Nắm vững lý thuyết căn bản, hoàn thành huấn luyện mô hình, tìm điểm vàng nén mô hình và ra toàn bộ kết quả thực nghiệm.
+     - **Tháng 03/2027 – Tháng 04, 05/2027 (1–2 tháng cuối):** Tối ưu hóa kết quả, viết quyển Báo cáo tổng kết + Bài báo khoa học và chuẩn bị bảo vệ trước Hội đồng.
+  5. **Yêu cầu bắt buộc về Kiến thức nền tảng để Bảo vệ đạt Giải cao:**
+     - Hội đồng chấm NCKH sẽ hỏi các câu hỏi kiểm tra **bản chất cơ bản** (Model thực chất là gì? Tập tham số `state_dict` lưu cái gì? CNN/U-Net trích xuất đặc trưng *feature* ra sao? Nén mô hình làm mất cái gì?). Cả 3 thành viên phải nắm thật chắc lý thuyết nền tảng trước khi phụ thuộc vào code AI.
+
+#### 2. Những gì ĐANG TRIỂN KHAI (In Progress 🔄)
+- Hệ thống hóa tài liệu **"Từ điển Bản chất Cốt lõi"** (Model, `state_dict`, Feature, Nén mô hình, Data Bias, Federated Learning) cho tất cả thành viên trong nhóm cùng nắm vững.
+- Chờ nhận thêm các bài báo khoa học mẫu về ảnh não/mắt từ thầy hướng dẫn (và thầy Dũng) để đối chiếu chuẩn trình bày.
+
+#### 3. Những gì CHƯA LÀM ĐƯỢC / KẾ HOẠCH TIẾP THEO (Pending / Backlog ⏳)
+- [ ] **Giai đoạn 2 (Huấn luyện Phân loại 2D trên 3.564 ảnh thật):** Chạy thực nghiệm đối sánh mô hình nặng vs. mô hình nhẹ và ghi nhận sự thay đổi độ chính xác trước/sau khi nén.
+- [ ] **Giai đoạn 3 & 4 (Huấn luyện Khoanh vùng U-Net 2D & Tìm "Điểm vàng" nén mô hình):** Đo đạc đường cong đánh đổi (*Trade-off Curve*) giữa **Tỷ lệ nén tham số (`state_dict`)** và **Độ chính xác (`Accuracy` / `Dice Score`)**.
+- [ ] **Giai đoạn 5B (Tùy chọn mở rộng nếu kịp tiến độ):** Mô phỏng kịch bản **Federated Learning (`FedAvg` / `Hierarchical FL`)** chia 3.564 ảnh thành 3 "Bệnh viện giả lập (Edge Workers)" cùng huấn luyện và gửi `state_dict` về `Aggregator`.
+- [ ] **Giai đoạn 6:** Hoàn thiện ứng dụng nguyên mẫu và viết quyển Báo cáo NCKH (hoàn thành trước đầu tháng 03/2027).
+
+---
+
 ## 📊 III. BẢNG TỔNG HỢP TRẠNG THÁI CÁC HẠNG MỤC (MILESTONE TRACKER)
 
 | Giai đoạn | Hạng mục công việc | Trạng thái | Ghi chú / Kết quả |
 | :--- | :--- | :---: | :--- |
-| **GĐ 0** | Chốt đề tài, mục tiêu, kiến trúc 2D & Khởi tạo Git/Codebase | ✅ **Hoàn thành** | Đã đồng bộ lên GitHub `binhminh1201/Brain-Tumor-MRI-2D-NCKH` |
+| **GĐ 0** | Chốt đề tài, họp GVHD định hướng 4 tháng & Khởi tạo Git/Codebase | ✅ **Hoàn thành** | Đã họp GVHD (03/11): Chốt 3.564 ảnh 2D, Nén mô hình + Mở rộng FL |
 | **GĐ 1A** | Cài đặt `.venv` (Python 3.11 + CUDA GPU) & Kiểm thử luồng dữ liệu 2D | ✅ **Hoàn thành** | Đã nhận GPU Quadro T1000 & chạy thông suốt toàn bộ code |
 | **GĐ 1B** | Tải & Tiền xử lý bộ dữ liệu MRI 2D bệnh nhân thật (Figshare + Sartaj) | ✅ **Hoàn thành** | **3.564 ảnh & Mask 2D thật** (`Train: 2574`, `Val: 485`, `Test: 505`) chia theo `PID` |
-| **GĐ 2** | Huấn luyện & Đánh giá các mô hình Phân loại CNN 2D (>90%) trên dữ liệu thật | 🔄 **Sẵn sàng chạy** | Dữ liệu thật đã nằm trong `data/processed/classification` |
-| **GĐ 3** | Huấn luyện & Đánh giá mô hình Khoanh vùng U-Net 2D trên dữ liệu thật | 🔄 **Sẵn sàng chạy** | Dữ liệu thật + Mask bác sĩ vẽ đã nằm trong `data/processed/segmentation` |
+| **GĐ 2** | Nắm vững lý thuyết căn bản + Huấn luyện Phân loại CNN 2D trên dữ liệu thật | 🔄 **Đang triển khai** | Củng cố lý thuyết bản chất `state_dict`/Feature & chạy train thật |
+| **GĐ 3** | Huấn luyện Khoanh vùng U-Net 2D & Tìm "Điểm vàng" nén mô hình | ⏳ **Chưa làm** | Thực nghiệm đánh đổi Dung lượng nén vs. Độ chính xác |
 | **GĐ 4** | Tích hợp Đa nhiệm + Đo diện tích u + Bản đồ nhiệt Grad-CAM | ⏳ **Chưa làm** | Module `gradcam.py` & `metrics.py` đã sẵn sàng |
-| **GĐ 5** | Xuất chuẩn ONNX, nén INT8 & Benchmark tốc độ trên CPU | ✅ **Hoàn thành bước 1** | Đã có bảng `outputs/tables/benchmark_results.csv` (nhanh gấp 13.1 lần, nhẹ hơn 96.8%) |
-| **GĐ 6** | Chạy thử nghiệm Ứng dụng Nguyên mẫu & Viết Bài báo cấp trường | ⏳ **Chưa làm** | Giao diện `app/main_app.py` đã sẵn sàng |
+| **GĐ 5** | Xuất chuẩn ONNX, nén INT8 & Mô phỏng mở rộng Federated Learning (FL) | 🔄 **Đã xong bước 1** | Đã có Benchmark ONNX CPU; có thể mở rộng thêm `FedAvg` nếu kịp |
+| **GĐ 6** | Ứng dụng Nguyên mẫu & Viết Báo cáo tổng kết (Hạn: Đầu tháng 03/2027) | ⏳ **Chưa làm** | Giao diện `app/main_app.py` đã sẵn sàng |
