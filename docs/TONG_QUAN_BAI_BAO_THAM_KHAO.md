@@ -21,6 +21,8 @@ Dưới đây là **5 bài báo khoa học quốc tế chuẩn mực nhất** g�
 * **Tên bài báo:** *UAC-Net: a unified multi-task network with aggregated contextual attention and cross-layer fusion for brain tumor segmentation and classification*
 * **Tác giả:** Chuanqi Cai, Jincan Zhang, Dongyan Zhang, Wenna Chen, Xinghua Tan, Ganqin Du, Hongwei Jiang
 * **Nơi công bố:** Tạp chí *Frontiers in Neuroscience* (Tháng 10/2026)
+* **🔗 Link đọc Full-text miễn phí:** https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2026.1986322/full
+* **🔗 Link DOI:** https://doi.org/10.3389/fnins.2026.1986322
 * **1. Họ giải quyết vấn đề gì?**
   * Trước đây, để vừa **khoanh vùng khối u (Segmentation)** vừa **phân loại loại u (Classification)** trên ảnh MRI 2D, người ta phải huấn luyện 2 mạng riêng biệt (1 mạng U-Net + 1 mạng CNN). Việc chạy 2 mạng riêng gây tốn gấp đôi bộ nhớ và thời gian tính toán, đồng thời bỏ phí mối liên hệ giữa hình dáng vị trí khối u và loại khối u.
 * **2. Họ dùng dữ liệu gì?**
@@ -39,6 +41,9 @@ Dưới đây là **5 bài báo khoa học quốc tế chuẩn mực nhất** g�
 * **Tên bài báo:** *Quantized Machine Learning Models for Medical Imaging in Low-Resource Healthcare Settings*
 * **Tác giả:** Sumanth Meenan Kanneti, Aryan Shah
 * **Nơi công bố:** *arXiv Preprint* (Tháng 05/2026)
+* **🔗 Link trang chính (arXiv):** https://arxiv.org/abs/2605.19207
+* **🔗 Link đọc/tải trực tiếp PDF:** https://arxiv.org/pdf/2605.19207
+* **🔗 Bài tham khảo bổ sung (Lightweight U-Net trên MDPI Bioengineering):** https://www.mdpi.com/2306-5354/11/12/1302
 * **1. Họ giải quyết vấn đề gì?**
   * Các bệnh viện tuyến cơ sở hoặc phòng khám nghèo tài nguyên (*Low-resource healthcare settings*) không có máy chủ GPU đắt tiền. Các mô hình học sâu thông thường quá nặng nên không thể chạy trực tiếp trên máy tính CPU yếu hoặc thiết bị biên tại phòng khám.
 * **2. Họ dùng dữ liệu và mô hình gì?**
@@ -56,6 +61,8 @@ Dưới đây là **5 bài báo khoa học quốc tế chuẩn mực nhất** g�
 * **Tên bài báo:** *Enhanced Performance of Brain Tumor Classification via Tumor Region Augmentation and Partition*
 * **Tác giả:** Jun Cheng, Wei Huang, Shuangliang Cao, Ru Yang, Wei Yang, Zhaoqiang Yun, Zhijian Wang, Qianjin Feng
 * **Nơi công bố:** Tạp chí *PLOS ONE* (Năm 2015), DOI: `10.1371/journal.pone.0140381`
+* **🔗 Link đọc Full-text miễn phí:** https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0140381
+* **🔗 Link bộ dữ liệu gốc trên Figshare:** https://figshare.com/articles/dataset/brain_tumor_dataset/1512427
 * **Nội dung cốt lõi:**
   * Công bố bộ dữ liệu chuẩn quốc tế gồm **3.064 lát cắt MRI 2D T1-weighted contrast-enhanced** từ **233 bệnh nhân** với 3 loại u (*Meningioma: 708 ảnh, Glioma: 1.426 ảnh, Pituitary: 930 ảnh*).
   * Chỉ ra rằng vùng mô xung quanh ranh giới khối u chứa rất nhiều thông tin đặc trưng (*features*) quan trọng để phân biệt 3 loại u này, đồng thời nhấn mạnh việc chia tập dữ liệu theo **Mã bệnh nhân (`PID`)** để đánh giá khách quan (không bị *Data Leakage*).
@@ -66,6 +73,8 @@ Dưới đây là **5 bài báo khoa học quốc tế chuẩn mực nhất** g�
 * **Tên bài báo:** *U-Net: Convolutional Networks for Biomedical Image Segmentation*
 * **Tác giả:** Olaf Ronneberger, Philipp Fischer, Thomas Brox
 * **Nơi công bố:** Hội nghị *MICCAI / Springer* (Năm 2015), DOI: `10.1007/978-3-319-24574-4_28`
+* **🔗 Link đọc/tải trực tiếp PDF:** https://arxiv.org/pdf/1505.04597
+* **🔗 Link trang chính (arXiv):** https://arxiv.org/abs/1505.04597
 * **Nội dung cốt lõi:**
   * Giới thiệu kiến trúc hình chữ U đối xứng gồm nhánh thu hẹp (**Contracting Path / Encoder** dùng tích chập + MaxPooling để bắt ngữ cảnh) và nhánh mở rộng (**Expansive Path / Decoder** dùng giải tích chập/Upsampling để định vị chính xác từng pixel), nối với nhau bằng các **đường nối tắt (Skip Connections)**.
   * Chứng minh U-Net có thể học phân đoạn ảnh y sinh 2D cực kỳ chính xác chỉ với vài nghìn bức ảnh nhờ kỹ thuật tăng cường dữ liệu (*Data Augmentation*).
@@ -76,6 +85,8 @@ Dưới đây là **5 bài báo khoa học quốc tế chuẩn mực nhất** g�
 * **Tên bài báo:** *Federated learning in medicine: facilitating multi-institutional collaborations without sharing patient data*
 * **Tác giả:** Micah J. Sheller, Brandon Edwards, G. Anthony Reina, Spyridon Bakas et al.
 * **Nơi công bố:** Tạp chí *Nature Scientific Reports* (Năm 2020), DOI: `10.1038/s41598-020-69250-1`
+* **🔗 Link đọc Full-text miễn phí:** https://www.nature.com/articles/s41598-020-69250-1
+* **🔗 Link tải trực tiếp PDF:** https://www.nature.com/articles/s41598-020-69250-1.pdf
 * **1. Họ giải quyết vấn đề gì (Đúng câu chuyện thầy kể ở phút 00:01 – 06:15)?**
   * Các bệnh viện không thể chia sẻ ảnh chụp MRI của bệnh nhân cho nhau vì luật bảo mật dữ liệu y tế (*Patient Privacy & Legality*). Nhưng nếu mỗi bệnh viện chỉ tự train trên vài trăm ảnh của riêng mình thì mô hình bị **Bias (thiên lệch)** và kém chính xác.
 * **2. Giải pháp Federated Learning (Học liên kết) hoạt động ra sao?**
